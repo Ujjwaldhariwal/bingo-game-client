@@ -1,4 +1,3 @@
-// api/bingo.js
 const { Server } = require('socket.io');
 const { createServer } = require('http');
 const { v4: uuidv4 } = require('uuid');
@@ -52,6 +51,7 @@ if (!io) {
       });
       socket.join(gameCode);
       socket.emit('gameCreated', { gameCode, playerId: socket.id });
+      console.log(`Game created with code: ${gameCode}`); // Log the created game code
     });
 
     // Handle joining a game

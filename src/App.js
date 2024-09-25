@@ -29,7 +29,12 @@ const App = () => {
   const [showAnimation, setShowAnimation] = useState(false);
 
   useEffect(() => {
+    socket.on('connect', () => {
+      console.log('Connected to the server');
+    });
+
     socket.on('gameCreated', ({ gameCode, playerId }) => {
+      console.log(`Game created with code: ${gameCode}`); // Log the game code
       setGameCode(gameCode);
       setPlayerId(playerId);
       setShowAnimation(true); // Show animation when game is created
@@ -70,6 +75,7 @@ const App = () => {
   }, [playerId]);
 
   const handleCreateGame = () => {
+    console.log('Creating game...');
     socket.emit('createGame');
   };
 
