@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import io from 'socket.io-client';
 
-const socket = io('https://bingo-game-client.vercel.app/'); // Replace with your actual server URL
+const socket = io('https://bingo-game-client-3vq6rgpva-ujjwal-dhariwals-projects.vercel.app/'); // Replace with your actual server URL
 
 const BingoCard = ({ numbers, markedNumbers, onNumberClick, isCurrentTurn }) => (
   <div className="grid grid-cols-5 gap-2 max-w-xs mx-auto">
