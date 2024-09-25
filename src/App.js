@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import io from 'socket.io-client';
 
-const socket = io('https://bingo-game-client-m69e7ru5f-ujjwal-dhariwals-projects.vercel.app/'); // Update to your Vercel URL in production
+const socket = io('https://bingo-game-client.vercel.app/'); // Replace with your actual server URL
 
 const BingoCard = ({ numbers, markedNumbers, onNumberClick, isCurrentTurn }) => (
   <div className="grid grid-cols-5 gap-2 max-w-xs mx-auto">
@@ -29,16 +29,11 @@ const App = () => {
   const [showAnimation, setShowAnimation] = useState(false);
 
   useEffect(() => {
-    socket.on('connect', () => {
-      console.log('Connected to the server');
-    });
-
     socket.on('gameCreated', ({ gameCode, playerId }) => {
-      console.log(`Game created with code: ${gameCode}`); // Log the game code
       setGameCode(gameCode);
       setPlayerId(playerId);
-      setShowAnimation(true); // Show animation when game is created
-      setTimeout(() => setShowAnimation(false), 3000); // Hide after 3 seconds
+      setShowAnimation(true);
+      setTimeout(() => setShowAnimation(false), 3000);
     });
 
     socket.on('gameJoined', ({ gameCode, playerId }) => {
@@ -75,7 +70,6 @@ const App = () => {
   }, [playerId]);
 
   const handleCreateGame = () => {
-    console.log('Creating game...');
     socket.emit('createGame');
   };
 
@@ -99,10 +93,10 @@ const App = () => {
             {showAnimation && (
               <motion.div
                 className="mb-4 text-center text-green-500 font-bold"
-                initial={{ opacity: 0, y: -20 }} // Start off-screen
-                animate={{ opacity: 1, y: 0 }} // Move to the center
-                exit={{ opacity: 0, y: -20 }} // Fade out
-                transition={{ duration: 0.5 }} // Transition duration
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
               >
                 Game Created! Code: {gameCode}
               </motion.div>
