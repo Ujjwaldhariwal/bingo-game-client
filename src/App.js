@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:3001');
+const socket = io('https://bingo-game-client-m69e7ru5f-ujjwal-dhariwals-projects.vercel.app/');
 
 const BingoCard = ({ numbers, markedNumbers, onNumberClick, isCurrentTurn }) => (
   <div className="grid grid-cols-5 gap-2 max-w-xs mx-auto mt-4">
